@@ -1,0 +1,279 @@
+.hero {
+  --px: 0;
+  --py: 0;
+  position: relative;
+  min-height: min(640px, calc(100vh - var(--strip) - var(--nav)));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(90deg, #f7f6f1 0%, #f3f1ea 45%, #ecebe4 100%);
+}
+
+/* ---------- the photo, bleeding off the right edge ---------- */
+
+.hero__photo {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 auto;
+  width: 62%;
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 24%);
+  mask: linear-gradient(90deg, transparent 0%, #000 24%);
+}
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 40%;
+  transform: translate(calc(var(--px) * -8px), calc(var(--py) * -6px)) scale(1.04);
+  transition: transform 1.2s var(--ease-out);
+  animation: photo-in 1.6s var(--ease-out) both;
+}
+@keyframes photo-in {
+  from { opacity: 0; transform: scale(1.1); }
+}
+
+/* morning sun climbing over the treatment room */
+.hero__sun {
+  position: absolute;
+  top: 14%;
+  right: 16%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7df 0%, var(--sun) 28%, rgba(255, 190, 90, 0.45) 46%, rgba(255, 180, 80, 0) 70%);
+  mix-blend-mode: screen;
+  filter: blur(2px);
+  animation: sun-rise 3.4s 0.4s var(--ease-out) both, sun-pulse 6s 3.8s ease-in-out infinite;
+}
+.hero__rays {
+  position: absolute;
+  top: calc(14% - 125px);
+  right: calc(16% - 125px);
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 214, 140, 0.32) 0deg 3deg, transparent 3deg 14deg);
+  -webkit-mask: radial-gradient(circle, transparent 18%, #000 26%, transparent 66%);
+  mask: radial-gradient(circle, transparent 18%, #000 26%, transparent 66%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: rays-in 2s 2.4s var(--ease-out) forwards, spin 90s linear infinite;
+}
+@keyframes sun-rise {
+  from { opacity: 0; transform: translateY(170px) scale(0.75); }
+  35% { opacity: 1; }
+}
+@keyframes sun-pulse { 50% { transform: scale(1.06); } }
+@keyframes rays-in { to { opacity: 1; } }
+@keyframes spin { to { rotate: 360deg; } }
+
+/* handwritten motto on the wall, top right */
+.hero__note {
+  position: absolute;
+  top: 9%;
+  right: 4%;
+  display: grid;
+  justify-items: start;
+  font-size: clamp(28px, 2.6vw, 38px);
+  transform: rotate(-6deg);
+}
+.hero__note span {
+  opacity: 0;
+  animation: write 0.7s var(--ease-out) forwards;
+  animation-delay: calc(1.2s + var(--i) * 0.28s);
+}
+.hero__note svg { width: 100%; height: 12px; margin-top: 4px; overflow: visible; }
+.hero__note path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw 0.9s 2.6s var(--ease-out) forwards;
+}
+.hero__note path + path { stroke-width: 1.6; opacity: 0.7; animation-delay: 2.9s; }
+@keyframes write {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(4px); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: none; }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- copy ---------- */
+
+.hero__inner { padding-top: 52px; padding-bottom: 44px; }
+.hero__copy { max-width: 560px; }
+
+.hero__example {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--text-2);
+  font-size: 12.5px;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
+}
+.hero__example:hover { color: var(--text); border-color: var(--accent); background: #fff; }
+.hero__example-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(44, 122, 87, 0.5); animation: ping 2s ease-out infinite; }
+@keyframes ping { 70%, 100% { box-shadow: 0 0 0 7px rgba(44, 122, 87, 0); } }
+
+.hero__eyebrow { animation: rise 0.9s var(--ease-out) both; }
+.hero__title {
+  margin-top: 14px;
+  font-size: clamp(42px, 5vw, 62px);
+  color: var(--text);
+  animation: rise 0.9s 0.1s var(--ease-out) both;
+}
+.hero__role {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--text-2);
+}
+.hero__intro {
+  max-width: 460px;
+  margin-top: 18px;
+  color: var(--text-2);
+  font-size: 16px;
+  animation: rise 0.9s 0.2s var(--ease-out) both;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  animation: rise 0.9s 0.3s var(--ease-out) both;
+}
+.hero__story {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 46px;
+  padding: 0 22px 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.3s, background 0.3s;
+}
+.hero__story:hover { border-color: var(--accent); background: #fff; }
+.hero__play {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--forest);
+  color: var(--forest);
+}
+.hero__play svg { fill: currentColor; translate: 1px 0; }
+.hero__play::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring { from { opacity: 0.8; transform: scale(1); } to { opacity: 0; transform: scale(1.6); } }
+
+/* four icon facts under the buttons */
+.hero__features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 38px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.feature {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  text-align: center;
+  animation: rise 0.9s var(--ease-out) both;
+  animation-delay: calc(0.45s + var(--d));
+}
+.feature + .feature::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: var(--line-strong);
+}
+.feature__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  color: var(--forest);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: transform 0.4s var(--ease-out), background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.feature:hover .feature__icon {
+  transform: translateY(-4px) rotate(-6deg);
+  background: var(--forest);
+  color: #fff;
+  box-shadow: 0 12px 24px -12px rgba(22, 63, 49, 0.8);
+}
+.feature__value {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.feature__value i { font-style: normal; color: var(--accent); display: inline-block; opacity: 0; transform: translateY(6px); transition: opacity 0.4s, transform 0.5s var(--ease-out); }
+.feature__value i.is-on { opacity: 1; transform: none; }
+.feature__label { color: var(--text-2); font-size: 12px; line-height: 1.3; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 980px) {
+  .hero { display: block; min-height: 0; }
+  .hero__photo {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 340px;
+    -webkit-mask: linear-gradient(180deg, #000 72%, transparent 100%);
+    mask: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
+  .hero__inner { padding-top: 8px; }
+  .hero__sun { top: 8%; right: 10%; width: 140px; height: 140px; }
+  .hero__rays { top: calc(8% - 100px); right: calc(10% - 100px); width: 340px; height: 340px; }
+}
+@media (max-width: 560px) {
+  .hero__photo { height: 260px; }
+  .hero__note { font-size: 24px; top: 7%; right: 5%; }
+  .hero__features { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 18px; }
+  .feature:nth-child(3)::before { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__photo img, .hero__sun, .hero__rays, .hero__note span, .hero__note path,
+  .hero__eyebrow, .hero__title, .hero__intro, .hero__actions, .feature, .hero__play::after, .hero__example-dot {
+    animation: none;
+    opacity: 1;
+    clip-path: none;
+    stroke-dashoffset: 0;
+  }
+}
