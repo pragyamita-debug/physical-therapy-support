@@ -151,25 +151,8 @@
   border-block: 1px solid var(--line);
 }
 .about__photo { grid-area: photo; position: relative; min-height: 380px; overflow: hidden; }
-.about__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: breathe 20s ease-in-out infinite; }
+.about__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; animation: breathe 20s ease-in-out infinite; }
 .about__photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 70%, rgba(251, 250, 246, 0.4)); }
-
-/* the name "mounted" on the reception wall where the clinic sign used to be */
-.about__sign {
-  position: absolute;
-  z-index: 1;
-  top: 13%;
-  left: 13.5%;
-  width: 34%;
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-  text-align: center;
-  color: #22392f;
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35)) drop-shadow(0 2px 3px rgba(60, 40, 10, 0.25));
-}
-.about__sign b { font-family: var(--font-head); font-size: clamp(16px, 2vw, 26px); font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; }
-.about__sign small { font-size: clamp(7px, 0.7vw, 9.5px); letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; }
 
 .about__copy { grid-area: copy; padding: 48px 48px 18px; }
 .about__copy .title { margin-top: 6px; }
@@ -272,7 +255,7 @@
 .cta__title { margin-top: 6px; font-size: clamp(22px, 2.2vw, 28px); font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; }
 .cta__copy p { margin-top: 6px; color: rgba(255, 255, 255, 0.75); font-size: 13.5px; }
 .cta__photo { align-self: stretch; position: relative; }
-.cta__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
+.cta__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 20% 25%; -webkit-mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
 .cta__perks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 .cta__perks li { position: relative; display: grid; justify-items: center; gap: 2px; padding: 0 10px; text-align: center; }
 .cta__perks li + li::before { content: ''; position: absolute; left: 0; top: 10%; bottom: 10%; width: 1px; background: rgba(255, 255, 255, 0.15); }
@@ -281,38 +264,6 @@
 .cta__perks b { font-size: 13px; font-weight: 600; }
 .cta__perks small { color: rgba(255, 255, 255, 0.7); font-size: 11.5px; line-height: 1.35; }
 
-/* the sun comes up from the bottom edge, behind everything */
-.cta__sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.cta__clip { position: absolute; left: 38%; bottom: 0; width: 360px; height: 100%; overflow: hidden; translate: -50% 0; }
-.cta__sun {
-  position: absolute;
-  left: 50%;
-  bottom: -150px;
-  width: 280px;
-  height: 280px;
-  margin-left: -140px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 236, 190, 0.95) 0%, rgba(255, 196, 92, 0.75) 32%, rgba(244, 160, 60, 0.25) 55%, transparent 70%);
-  transform: translateY(160px);
-  transition: transform 2.6s var(--ease-out);
-}
-.cta__rays {
-  position: absolute;
-  left: 38%;
-  bottom: -320px;
-  width: 640px;
-  height: 640px;
-  translate: -50% 0;
-  border-radius: 50%;
-  background: repeating-conic-gradient(rgba(255, 210, 130, 0.12) 0deg 2.5deg, transparent 2.5deg 12deg);
-  -webkit-mask: radial-gradient(circle, transparent 20%, #000 28%, transparent 70%);
-  mask: radial-gradient(circle, transparent 20%, #000 28%, transparent 70%);
-  opacity: 0;
-  transition: opacity 2s 1s;
-  animation: spin 120s linear infinite;
-}
-.cta.is-up .cta__sun { transform: none; }
-.cta.is-up .cta__rays { opacity: 1; }
 
 /* ================= footer ================= */
 
@@ -400,7 +351,6 @@
   .years { margin-bottom: 18px; }
   .cta__inner { grid-template-columns: 1fr; }
   .cta__btn { justify-self: start; }
-  .cta__clip, .cta__rays { left: 70%; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; }
   .footer__base { flex-direction: column; }
@@ -415,8 +365,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about__photo img, .cta__rays, .strip__notice svg { animation: none; }
-  .cta__sun { transform: none; transition: none; }
-  .cta__rays { opacity: 1; transition: none; }
+  .about__photo img, .strip__notice svg { animation: none; }
   .stars svg { opacity: 1; transform: none; transition: none; }
 }

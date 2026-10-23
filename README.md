@@ -28,11 +28,11 @@ Everything runs in the browser. The CV is read client-side and never sent to a s
 | Top bar | leaf-and-sun mark, name, role, section links, **Upload CV** / **Get in touch** |
 | Hero | specialty and city, name (last name in green), role, tagline, four counting facts — years, projects, skills, degree — and the photo with the motto handwritten on the wall |
 | Areas of Expertise | six photo cards from the projects (skills fill in if there are fewer than six); **Learn more** opens the details |
-| About me | the name mounted as the sign on the clinic wall, the summary, and a checklist of experience, degrees and certifications |
+| About me | photo of a clinician with a spine model, the summary, and a checklist of experience, degrees and certifications |
 | Experience | roles on a timeline; the lit card walks from role to role and the years count up |
 | Skills | icon tiles; **View all** shows the rest |
 | Results | achievements and certifications as quote cards, stars filling in |
-| Contact band | the next goal, a sunrise over the band, next step / location / certifications |
+| Contact band | the next goal, a clinician photo, next step / location / certifications |
 | Footer | links, skills, contact details, handwritten motto |
 
 ## Animations
@@ -43,7 +43,7 @@ Everything runs in the browser. The CV is read client-side and never sent to a s
 | Decoding text | degree | `useScramble` — characters settle left to right |
 | Moving, lit borders | every card | conic gradient on `@property --angle`, masked to a thin ring, plus a blurred halo (`GlowCard`) |
 | Hover | cards, icons, skills | pointer spotlight + slight 3D tilt, lift, photo zoom, icon turns green |
-| Rising sun | hero photo, contact band | the sun climbs into place (clipped at the horizon in the band) and the rays start turning |
+| Rising sun | hero photo | the sun climbs into place and the rays start turning |
 | Handwriting | hero motto | each word is written in, then the underline draws |
 | Role highlight | experience | the active role lights up and hands over to the next (pauses on hover) |
 
@@ -90,9 +90,10 @@ src/
     NavBar.tsx, Hero.tsx, Sections.tsx, Dashboard.tsx
     GlowCard.tsx          the moving-border card
     Logo.tsx              leaf + sun mark
-  assets/photos/          hero, six treatment photos, clinic reception, CTA photo
+  assets/photos/          hero, six treatment photos, about photo (clinic.jpg), contact photo (doctor.jpg)
   styles/global.css       colour tokens, type, buttons
 ```
 
-The photos in `src/assets/photos/` were cut from the design mock-up (with its printed text and logos
-removed), so they are fairly small. Swap in higher-resolution versions with the same file names for a sharper page.
+The photos in `src/assets/photos/` were cut from a design mock-up and enlarged 4× with an EDSR
+super-resolution network (OpenCV `dnn_superres`) plus a light sharpen. They are much clearer than a plain
+resize, but the source was small — swap in higher-resolution photos with the same file names for the sharpest page.

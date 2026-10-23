@@ -6,7 +6,7 @@ import care4 from '../assets/photos/care-4.jpg';
 import care5 from '../assets/photos/care-5.jpg';
 import care6 from '../assets/photos/care-6.jpg';
 import clinic from '../assets/photos/clinic.jpg';
-import shoes from '../assets/photos/shoes.jpg';
+import doctor from '../assets/photos/doctor.jpg';
 import { useCountUp } from '../hooks/useCountUp';
 import { useInView } from '../hooks/useInView';
 import { useReducedMotion } from '../hooks/useReducedMotion';
@@ -111,12 +111,6 @@ export function AboutSection({ resume, onDownloadCv, isExample }: { resume: Resu
     <section id="about" className="about" aria-labelledby="about-title">
       <div className="about__photo">
         <img src={clinic} alt="" loading="lazy" />
-        {/* the candidate's name as the sign on the reception wall */}
-        <div className="about__sign" aria-hidden>
-          <Logo size={44} />
-          <b>{resume.name}</b>
-          <small>{role}</small>
-        </div>
       </div>
 
       <Reveal className="about__copy">
@@ -313,7 +307,6 @@ export function ResultsSection({ resume }: { resume: Resume }) {
 /* ================= call to action band with the rising sun ================= */
 
 export function CtaBand({ resume }: { resume: Resume }) {
-  const [ref, inView] = useInView<HTMLElement>(0.35);
   const goal = resume.goals[0];
   const next = resume.goals[1];
   const certs = resume.certifications.length;
@@ -324,13 +317,7 @@ export function CtaBand({ resume }: { resume: Resume }) {
   ];
 
   return (
-    <section id="contact" ref={ref} className={`cta ${inView ? 'is-up' : ''}`} aria-labelledby="contact-title">
-      <div className="cta__sky" aria-hidden>
-        <span className="cta__clip">
-          <span className="cta__sun" />
-        </span>
-        <span className="cta__rays" />
-      </div>
+    <section id="contact" className="cta" aria-labelledby="contact-title">
       <div className="wrap cta__inner">
         <Reveal className="cta__copy">
           <span className="label cta__label">Take the next step</span>
@@ -343,7 +330,7 @@ export function CtaBand({ resume }: { resume: Resume }) {
           Get in touch <Icon name="arrowRight" size={15} />
         </a>
         <div className="cta__photo" aria-hidden>
-          <img src={shoes} alt="" loading="lazy" />
+          <img src={doctor} alt="" loading="lazy" />
         </div>
         <ul className="cta__perks">
           {perks.map((p) => (
